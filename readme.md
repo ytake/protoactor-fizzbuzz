@@ -1,4 +1,4 @@
-# ちょっと大袈裟なFizzBuzz
+# FizzBuzz
 
 ```bash
 $ go run main.go
