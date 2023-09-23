@@ -8,13 +8,8 @@ import (
 
 type RouteSlip struct{}
 
-type FizzBuzz struct {
-	RouteSlip []*actor.PID
-	Message   interface{}
-}
-
 // SendMessageToNextTask is a method
-func (_ *RouteSlip) SendMessageToNextTask(context actor.Context, routeSlip []*actor.PID, msg *command.Say) {
+func (_ *RouteSlip) SendMessageToNextTask(context actor.Context, routeSlip []*actor.PID, msg *message.FizzBuzz) {
 	nextTask := routeSlip[0]
 	newSlip := routeSlip[1:]
 	if len(newSlip) == 0 {
@@ -44,6 +39,6 @@ func (state *SlipRouter) createRouteSlip() []*actor.PID {
 func (state *SlipRouter) Receive(context actor.Context) {
 	switch msg := context.Message().(type) {
 	case *command.Say:
-		state.SendMessageToNextTask(context, state.createRouteSlip(), msg)
+		state.SendMessageToNextTask(context, state.createRouteSlip(), &message.FizzBuzz{Number: msg.Number})
 	}
 }

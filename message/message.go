@@ -1,12 +1,22 @@
 package message
 
 import (
+	"fmt"
+
 	"github.com/asynkron/protoactor-go/actor"
-	"github.com/ytake/protoactor-fizzbuzz/command"
 )
 
 // RouteSlip is a message
 type RouteSlip struct {
 	RouteSlip []*actor.PID
-	Message   *command.Say
+	Message   *FizzBuzz
+}
+
+type FizzBuzz struct {
+	Number int64
+	Text   string
+}
+
+func (f *FizzBuzz) String() string {
+	return fmt.Sprintf("%d: %s", f.Number, f.Text)
 }
